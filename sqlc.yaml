@@ -1,0 +1,11 @@
+version: "2"
+sql:
+  - schema: "sql/schema.sql"
+    queries: "sql/queries.sql"
+    engine: "sqlite"
+    gen:
+      go:
+        package: "dndb"
+        emit_json_tags: true
+        out: "internal/dndb"
+        emit_exact_table_names: true
