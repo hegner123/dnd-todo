@@ -17,7 +17,6 @@ var Config config.Config
 
 func main() {
 	useSSL = false
-	fmt.Println("main function")
 	err := Config.LoadConfig("config.json")
 	if err != nil {
 		log.Fatal(err)
@@ -27,7 +26,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Use http.FileServer to serve files from the static directory
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		s := strings.Split(r.URL.Path, "/")
@@ -43,7 +41,6 @@ func main() {
 				segments = segments[1:]
 			}
 			trimmedPath := wd + "/" + strings.Join(segments, "/")
-			fmt.Println(trimmedPath)
 			file, err := os.Open(trimmedPath)
 			if err != nil {
 				http.NotFound(w, r)
@@ -53,7 +50,6 @@ func main() {
 			info, _ := file.Stat()
 			http.ServeContent(w, r, info.Name(), info.ModTime(), file)
 		} else {
-
 			R := router.New(w, r)
 			err := R.Match().Respond()
 			if err != nil {

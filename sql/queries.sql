@@ -16,9 +16,33 @@ SELECT * FROM tasks
 WHERE time_fixed_time LIKE ?;
 
 -- name: CreateTask :one
-INSERT INTO tasks (task_id, parent_id, project_id, name, description, priority, difficulty, duration, time_fixed,
-                   time_fixed_time, created_at, updated_at)
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING *;
+INSERT INTO tasks (
+    task_id, 
+    parent_id, 
+    project_id, 
+    name, 
+    description, 
+    priority, 
+    difficulty, 
+    duration, 
+    time_fixed,
+    time_fixed_time, 
+    created_at, 
+    updated_at
+    ) VALUES (
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?
+    ) RETURNING *;
 
 -- name: UpdateTask :one
 UPDATE tasks
